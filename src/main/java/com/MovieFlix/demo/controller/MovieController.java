@@ -6,10 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -33,7 +30,16 @@ public class MovieController {
 
 
     }
+    @GetMapping("/{movieId}")
+    public ResponseEntity<String> getMovieHanler(@PathVariable Integer movieId){
+        return new ResponseEntity(movieService.getMovie(movieId) , HttpStatus.OK);
 
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<String> getAllMovisHandler(){
+        return  new ResponseEntity(movieService.getAllMovies() , HttpStatus.OK);
+    }
     //to convert string into json
     private MovieDto convertToMovieDto(String movieDtoObj) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

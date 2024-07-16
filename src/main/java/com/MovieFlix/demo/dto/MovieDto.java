@@ -2,6 +2,7 @@ package com.MovieFlix.demo.dto;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Set;
@@ -29,6 +30,7 @@ public class MovieDto {
 
     private Set<String> movieCast;
 
+ @NotNull(message = "Please provide the movie's release year")
     private Integer releaseYear;
 
 
