@@ -259,7 +259,8 @@ return "Movie dleted  with id = " + id ;
     }
 
     @Override
-    public MoviePageResponse getAllMoviesWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String sortBy, String dir) {
+    public MoviePageResponse getAllMoviesWithPaginationAndSorting(Integer pageNumber, Integer pageSize,
+                                                                  String sortBy, String dir) {
         Sort sort = dir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
 
@@ -294,5 +295,4 @@ return "Movie dleted  with id = " + id ;
                 moviePages.isLast());
     }
 
-//
 }

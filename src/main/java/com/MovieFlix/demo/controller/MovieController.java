@@ -1,8 +1,10 @@
 package com.MovieFlix.demo.controller;
 
 import com.MovieFlix.demo.dto.MovieDto;
+import com.MovieFlix.demo.dto.MoviePageResponse;
 import com.MovieFlix.demo.exception.EmptyFileException;
 import com.MovieFlix.demo.service.MovieService;
+import com.MovieFlix.demo.utils.AppConstants;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
@@ -63,8 +65,24 @@ public class MovieController {
 
 
 
+@GetMapping("/allMoviesPage")
+public  ResponseEntity<MoviePageResponse> getMoviePagination(@RequestParam(defaultValue = AppConstants.PAGE_NUMBER , required = false) Integer pageNumber ,
+                                                             @RequestParam(defaultValue = AppConstants.PAGE_SIZE , required = false)Integer pageSize
+){
+return ResponseEntity.ok(movieService.getAllMovieWithPaggination(pageNumber,pageSize));
+    }
 
 
+    @GetMapping("/allMoviesPageSort")
+    public  ResponseEntity<MoviePageResponse> getMoviePaginationAndSorting(@RequestParam(defaultValue = AppConstants.PAGE_NUMBER , required = false) Integer pageNumber , @RequestParam(defaultValue = AppConstants.PAGE_SIZE , required = false)Integer pageSize,  @RequestParam(defaultValue = AppConstants.SORT_BY , required = false) String sortBy , @RequestParam(defaultValue = AppConstants.SORT_DIR) String sortDir
+    )
+
+    {
+
+
+
+        return ResponseEntity.ok(movieService.getAllMoviesWithPaginationAndSorting(pageNumber,pageSize,sortBy,sortDir));
+    }
 
 
     //to convert string into json
