@@ -23,15 +23,17 @@ public class RefreshTokenService {
 
 
 //    So in this function we check if refresh token of the user is present or not
-    public RefreshToken createrefreshToken(String username){
-   User user =  userRepository.findByUserName(username)
+    public RefreshToken createRefreshToken(String username){
+   User user =  userRepository.findByEmail(username)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with email :" + username));
     RefreshToken refreshToken = user.getRefreshToken();
 
     //in  it is not present the we generate refresh token and save
 
     if(refreshToken == null){
-        long refreshTokenValidity = 5*60*60*1000;
+//        long refreshTokenValidity = 5*60*60*1000;
+        //for testinG
+        long refreshTokenValidity = 30*1000;
         refreshToken = RefreshToken.builder().
                 refreshToken(UUID.randomUUID().toString()).
                 expirationTime(Instant.now().
