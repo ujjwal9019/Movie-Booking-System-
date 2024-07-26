@@ -18,27 +18,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
-
     private final AuthFilterService authFilterService;
-    private AuthenticationProvider authenticationProvider;
-//The line .requestMatchers("/api/v1/auth/**", "/forgotPassword/**").permitAll() configures Spring Security to allow public access to authentication and password recovery endpoints,
-// ensuring that users can log in, register, and recover their passwords without needing to be authenticated.
-// This is a crucial part of the security configuration that helps balance security with user accessibility
+    private final AuthenticationProvider authenticationProvider;
 
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-    http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/v1/auth/**", "/forgotPassword/**")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
-            .sessionManagement(session -> session
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider)
-            .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/v1/auth/**")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
 
-    return http.build();
-}
-
+        return http.build();
+    }
 }

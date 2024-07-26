@@ -43,7 +43,7 @@ private final JwtService jwtService;
 
     @PostMapping("/refresh")
 public ResponseEntity<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest){
-    RefreshToken refreshToken =  refreshTokenService.verifyRefreshtoken(refreshTokenRequest.getRefreshToken());
+    RefreshToken refreshToken =  refreshTokenService.verifyRefreshToken(refreshTokenRequest.getRefreshToken());
 
     User user =  refreshToken.getUser();
 

@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @Entity
 @Builder
 @NoArgsConstructor
@@ -21,10 +23,10 @@ public class RefreshToken {
 
     @Column(nullable = false , length = 500)
     @NotBlank(message = "please enter refresh token value")
-    private  Integer refreshToken;
+    private  String refreshToken;
 
     @Column(nullable = false)
-    private  Integer  expirationToken;
+    private Instant expirationTime;
 
     @OneToOne
     private  User user;

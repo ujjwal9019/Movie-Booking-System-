@@ -39,10 +39,10 @@ public class AuthService {
                 .build();
         User savedUser = userRepository.save(user);
         var accessToken = jwtService.generateToken(savedUser);
-        var refreshToken = refreshTokenService.createrefreshToken(savedUser.getEmail());
+        var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());
 
         return AuthResponse.builder()
-                .accesToken(accessToken)
+                .accessToken(accessToken)
                 .refreshToken(refreshToken.getRefreshToken()).build();
 
     }
@@ -59,7 +59,7 @@ public class AuthService {
        var refreshToken = refreshTokenService.createRefreshToken(loginRequest.getEmail());
 
         return AuthResponse.builder()
-                .accesToken(accessToken)
+                .accessToken(accessToken)
                 .refreshToken(refreshToken.getRefreshToken()).build();
 
     }
