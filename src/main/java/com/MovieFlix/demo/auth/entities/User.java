@@ -52,8 +52,6 @@ public class User implements UserDetails{
    @Enumerated(EnumType.STRING)
    private  UserRole role;
 
-   @OneToOne(mappedBy = "user")
-   private ForgetPassword forgetPassword;
 
 
     @Override
