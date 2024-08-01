@@ -23,7 +23,7 @@ public class FileController {
         this.fileService = fileService;
     }
 //    This will bring the value from application yml file
-    @Value("$(project.poster)")
+    @Value("${project.poster}")
     private String path;
 
     @PostMapping("/upload")
