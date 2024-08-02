@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,10 @@ public class Movie {
     @ElementCollection
     @CollectionTable(name = "movie_cast")
     private Set<String> movieCast;
+
+    @Column(nullable = false )
+    @NotBlank(message = "Please Provide Description")
+    private String description;
 
     @Column(nullable = false )
     @NotNull(message = "Please Provide Movies release Date")

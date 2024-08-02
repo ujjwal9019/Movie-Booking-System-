@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
+@Getter
 public class MovieDto {
    private Integer movieId;
 
@@ -30,8 +31,13 @@ public class MovieDto {
 
     private Set<String> movieCast;
 
- @NotNull(message = "Please provide the movie's release year")
+    @NotBlank(message = "Please Provide Movies Description")
+    private String description;
+
+
+    @NotNull(message = "Please provide the movie's release year")
     private Integer releaseYear;
+
 
 
     @NotBlank(message = "Please Provide Movies poster")
