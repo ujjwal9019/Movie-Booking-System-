@@ -66,7 +66,7 @@ public class MovieController {
     public ResponseEntity<String> deleteMovieHandler(@PathVariable Integer movieId ) throws IOException {
         return ResponseEntity.ok(movieService.deleteMovie(movieId));
     }
-
+    
 
 
 @GetMapping("/allMoviesPage")

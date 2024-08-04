@@ -1,8 +1,8 @@
 spring:
   datasource:
     username: root
-    password: 1234
-    url: jdbc:mysql://localhost:3306/movies
+    password: DB_PASSWORD
+    url: jdbc:mysql://${DB_HOST:localhost}:{DB_PORT:3306}/${DB_NAME:movies}
   jpa:
     hibernate:
       ddl-auto: update

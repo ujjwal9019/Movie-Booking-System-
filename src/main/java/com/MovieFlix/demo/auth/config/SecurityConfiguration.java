@@ -48,7 +48,8 @@ public class SecurityConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173") // Adjust to your frontend URL
+                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins("https://movie-info-navy-six.vercel.app/")// Adjust to your frontend URL
                         .allowedMethods("*")
                         .allowedHeaders("*");
             }

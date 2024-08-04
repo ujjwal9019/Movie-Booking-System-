@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,17 +156,23 @@ public class MovieServiceImpl implements MovieService {
                 posterUrl
         );
     }
-
     @Override
     public String deleteMovie(Integer movieId) throws IOException {
+        // 1. check if movie object exists in DB
         Movie mv = movieRespository.findById(movieId)
-                .orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId));
+                .orElseThrow(() -> new MovieNotFoundException("Movie not found with id = " + movieId));
+        Integer id = mv.getMovieId();
 
+        // 2. delete the file associated with this object
         Files.deleteIfExists(Paths.get(path + File.separator + mv.getPoster()));
+
+        // 3. delete the movie object
         movieRespository.delete(mv);
 
-        return "Movie deleted with id = " + movieId;
+        return "Movie deleted with id = " + id;
     }
+
+
 
     @Override
     public MoviePageResponse getAllMovieWithPaggination(Integer pageNumber, Integer pageSize) {
